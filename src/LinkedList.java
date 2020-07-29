@@ -18,6 +18,7 @@ public class LinkedList
 	
 	Node head = null;
 	Node tail = null;
+	int nodeSize = 0;
 	
 	public void addFirst(Object item)
 	{
@@ -26,12 +27,14 @@ public class LinkedList
 		if(head == null)
 		{
 			head = newNode;
+			tail = head;
+			nodeSize++;
 		}
 		else
 		{
 			newNode.next = head;
 			head = newNode;
-			
+			nodeSize++;
 		}
 		
 	}
@@ -44,13 +47,23 @@ public class LinkedList
 		{
 			head = newNode;
 			tail = newNode;
+			nodeSize++;
 		}
-		
-		if(head == tail)
+		else
 		{
-			
-		}
+			if(head == tail)
+			{
+			head.next = newNode;
+			tail = head.next;
+			nodeSize++;
+			}
+			else
+			{
+				tail.next = newNode;
+				nodeSize++;
+			}
 		
+		}
 	}
 	
 
