@@ -13,11 +13,11 @@ public class LinkedList
 			this.data = item;
 			this.next = null;
 		}
-		
 	}
 	
 	Node head = null;
 	Node tail = null;
+	Node prev = null;
 	int nodeSize = 0;
 	
 	public void addFirst(Object item)
@@ -53,18 +53,80 @@ public class LinkedList
 		{
 			if(head == tail)
 			{
-			head.next = newNode;
-			tail = head.next;
-			nodeSize++;
+				head.next = newNode;
+				prev = head;
+				tail = head.next;
+				nodeSize++;
 			}
 			else
 			{
 				tail.next = newNode;
+				prev = tail;
+				tail = tail.next;
 				nodeSize++;
 			}
-		
 		}
 	}
 	
-
+	public void removeFirst()
+	{
+		if(head == null)
+			{
+				throw new NullPointerException("Node does not exist");
+			}
+		
+		if(head.next == null)
+			{
+				head = null;
+				tail = null;
+				nodeSize--;
+			}
+		else 
+			{
+				head = head.next;
+				nodeSize--;
+			}
+	}
+	
+	
+	public void removeLast()
+	{
+			if(head == null || head == tail)
+			{
+				removeFirst();
+			}
+			else
+			{
+				tail = prev;
+				nodeSize--;
+			}
+	
+	}
+	
+	public Object peekFirst()
+	{
+		if(head == null)
+		{
+			throw new NullPointerException("Node does not exist");
+		}
+		
+		return head.data;
+	}
+	
+	public Object peekLast()
+	{
+		if(nodeSize <= 1 )
+		{
+			peekFirst();
+		}
+		
+		return tail.data;
+	}
+	
+	public int getSize()
+	{
+		return nodeSize;
+	}
+	
+	
 }
