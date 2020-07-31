@@ -1,8 +1,9 @@
+import java.awt.List;
 
-public class LinkedList 
+public class LinkedList<E> extends List
 {
 
-	public class Node<E>
+	public static class Node<E>
 	{
 		
 		Object data;
@@ -15,12 +16,12 @@ public class LinkedList
 		}
 	}
 	
-	Node head = null;
-	Node tail = null;
-	Node prev = null;
-	int nodeSize = 0;
+	static Node head = null;
+	static Node tail = null;
+	static Node prev = null;
+	static int nodeSize = 0;
 	
-	public void addFirst(Object item)
+	public static void addFirst(Object item)
 	{
 		Node newNode = new Node(item);
 		
@@ -41,7 +42,7 @@ public class LinkedList
 	
 	public void addLast(Object item)
 	{
-		Node newNode = new Node(item);
+		Node newNode = new Node<E>(item);
 		
 		if(head == null)
 		{
@@ -123,9 +124,31 @@ public class LinkedList
 		return tail.data;
 	}
 	
-	public int getSize()
+	public int getListSize()
 	{
 		return nodeSize;
+	}
+	
+	public void printList()
+	{
+		Node temp = head;
+		
+		if(temp == null)
+		{
+			System.out.println("Empty List");
+		}
+		if(temp.next == null)
+		{
+			System.out.println(temp.data);
+		}
+		
+		while(temp != null)
+		{
+			System.out.print(temp.data + " ");
+			temp = temp.next;
+			
+		}
+		System.out.println();
 	}
 	
 	
